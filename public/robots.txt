@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://edentechnologies.com.br/sitemap.xml

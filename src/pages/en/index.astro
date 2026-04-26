@@ -1,0 +1,17 @@
+---
+import Home from '../../components/Home.astro';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { translations } from '../../translations';
+
+const t = translations.en;
+---
+
+<Layout
+  lang="en"
+  title="Éden Technologies — Custom software, engineered with precision"
+  description="Software house based in São Paulo. We build platforms, internal products and mission-critical systems for companies that won't settle for generic SaaS."
+>
+  <Header nav={t.nav} lang="en" />
+  <Home t={t} />
+</Layout>

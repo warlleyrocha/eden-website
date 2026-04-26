@@ -1,0 +1,46 @@
+---
+import type { Translations } from "../../translations";
+
+interface Props {
+  t: Translations["cta"];
+}
+
+const { t } = Astro.props;
+---
+
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-final glass-strong" data-reveal>
+      <div class="eyebrow" style="margin-bottom:16px">&nbsp;</div>
+      <h2 id="cta-title">{t.title}</h2>
+      <p id="cta-sub">{t.sub}</p>
+      <div class="hero-cta">
+        <a href="mailto:contato@eden.tech" id="cta-primary" class="btn btn-primary">{t.primary} <span class="btn-arrow">→</span></a>
+        <a href="mailto:contato@eden.tech" id="cta-secondary" class="btn btn-ghost mono">{t.secondary}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #cta .cta-final {
+    padding: var(--s-12) var(--s-8);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  #cta .cta-final h2 { max-width: 24ch; margin: 0 auto; }
+  #cta .cta-final p {
+    color: var(--text-dim);
+    margin-top: var(--s-4);
+    font-size: 16px;
+    max-width: 44ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #cta .hero-cta { justify-content: center; }
+  .hero-cta {
+    display: flex; flex-wrap: wrap; gap: var(--s-3);
+    margin-top: var(--s-6);
+  }
+</style>

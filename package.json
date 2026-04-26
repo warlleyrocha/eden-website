@@ -1,0 +1,24 @@
+{
+  "name": "eden-website",
+  "description": "Eden official website",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "author": "warlleyrocha <warlleyrocha@icloud.com>",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "astro check",
+    "ci": "npm run typecheck && npm run build"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "astro": "^6.1.9",
+    "typescript": "^5.9.3"
+  }
+}

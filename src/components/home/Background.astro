@@ -1,0 +1,67 @@
+<div class="aurora"><div class="aurora-3"></div></div>
+<div class="grid-overlay"></div>
+
+<style>
+  .aurora {
+    position: fixed; inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora::before,
+  .aurora::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    mix-blend-mode: screen;
+    animation: floatBlob 22s ease-in-out infinite alternate;
+  }
+  :global([data-theme="light"]) .aurora::before,
+  :global([data-theme="light"]) .aurora::after {
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+  }
+  .aurora::before {
+    width: 55vw; height: 55vw;
+    left: -10vw; top: -10vw;
+    background: radial-gradient(circle, var(--brand) 0%, transparent 70%);
+  }
+  .aurora::after {
+    width: 50vw; height: 50vw;
+    right: -15vw; bottom: -20vw;
+    background: radial-gradient(circle, var(--brand-2) 0%, transparent 70%);
+    animation-delay: -11s;
+  }
+  .aurora-3 {
+    position: absolute;
+    width: 40vw; height: 40vw;
+    left: 30vw; top: 40vh;
+    background: radial-gradient(circle, var(--brand-deep) 0%, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.35;
+    border-radius: 50%;
+    animation: floatBlob 28s ease-in-out infinite alternate;
+    animation-delay: -6s;
+    mix-blend-mode: screen;
+  }
+  :global([data-theme="light"]) .aurora-3 { mix-blend-mode: multiply; opacity: 0.22; }
+
+  .grid-overlay {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+      linear-gradient(to right, var(--stroke-soft) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--stroke-soft) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+  }
+
+  @keyframes floatBlob {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(8vw, 6vh) scale(1.15); }
+    100% { transform: translate(-5vw, -8vh) scale(0.9); }
+  }
+</style>

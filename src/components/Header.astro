@@ -1,0 +1,97 @@
+---
+import type { Translations } from "../translations";
+
+interface Props {
+  nav: Translations["nav"];
+  lang: "pt" | "en";
+}
+
+const { nav, lang } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<nav class="nav glass">
+  <a href={baseUrl} class="nav-logo" aria-label="Éden Technologies">
+    <img src={`${baseUrl}logo.png`} alt="Éden Technologies" class="nav-logo-image" width="40" height="33" />
+    <span>Éden<span style="color:var(--text-mute);font-weight:400"> / tech</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="#services" data-nav="services">{nav.services}</a>
+    <a href="#about" data-nav="about">{nav.about}</a>
+    <a href="#stack" data-nav="stack">{nav.stack}</a>
+    <a href="#cases" data-nav="cases">{nav.cases}</a>
+    <a href="#pricing" data-nav="pricing">{nav.pricing}</a>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button data-lang-btn="pt" class={lang === "pt" ? "active" : ""}>PT</button>
+    <button data-lang-btn="en" class={lang === "en" ? "active" : ""}>EN</button>
+  </div>
+  <a href="#cta" class="nav-cta" data-nav="cta">{nav.cta}</a>
+</nav>
+
+<style>
+  .nav {
+    position: fixed; top: var(--s-4); left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex; align-items: center; gap: var(--s-5);
+    padding: 8px 8px 8px 20px;
+    border-radius: 999px;
+    width: min(960px, calc(100vw - 32px));
+  }
+  .nav-logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 600; letter-spacing: -0.02em;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .nav-logo-image {
+    width: 40px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+    flex: 1;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .nav-links a {
+    padding: 6px 12px;
+    border-radius: 999px;
+    color: var(--text-dim);
+    transition: all .2s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--text); background: var(--glass-bg); }
+  .nav-cta {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--bg-0);
+    font-size: 13px; font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--stroke);
+    border-radius: 999px;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+  }
+  .lang-toggle button {
+    padding: 4px 8px;
+    color: var(--text-mute);
+    transition: all 0.2s;
+  }
+  .lang-toggle button.active { background: var(--glass-bg-2); color: var(--text); }
+
+  @media (max-width: 760px) {
+    .nav-links { display: none; }
+    .nav { padding: 8px 8px 8px 16px; gap: var(--s-3); }
+    .nav-logo-image { width: 36px; }
+  }
+</style>

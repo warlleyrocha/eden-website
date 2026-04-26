@@ -1,0 +1,133 @@
+---
+import type { Translations } from "../../translations";
+
+interface Props {
+  t: Translations["pricing"];
+}
+
+const { t } = Astro.props;
+---
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div>
+        <div class="eyebrow" id="pricing-eyebrow">{t.eyebrow}</div>
+        <h2 id="pricing-title" style="margin-top:12px">{t.title}</h2>
+      </div>
+      <p class="aside" id="pricing-aside">{t.aside}</p>
+    </div>
+    <div class="pricing" id="pricing-grid">
+      {t.plans.map((p) => (
+        <article class={`plan glass${p.featured ? " featured" : ""}`} data-reveal>
+          <div class="plan-name">{p.name}</div>
+          <div>
+            <div class="plan-price">{p.price}<span class="u">{p.unit}</span></div>
+          </div>
+          <div class="plan-desc">{p.desc}</div>
+          <ul>{p.features.map((f) => <li>{f}</li>)}</ul>
+          <button class={`btn ${p.featured ? "btn-primary" : "btn-ghost"}`}>{p.cta} <span class="btn-arrow">→</span></button>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-head {
+    display: flex; align-items: end; justify-content: space-between;
+    gap: var(--s-6);
+    margin-bottom: var(--s-8);
+  }
+  @media (max-width: 720px) {
+    .section-head { flex-direction: column; align-items: start; }
+  }
+  .section-head h2 { max-width: 18ch; }
+  .section-head .aside { color: var(--text-dim); max-width: 40ch; font-size: 15px; }
+
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4);
+  }
+  @media (max-width: 900px) { .pricing { grid-template-columns: 1fr; } }
+  .plan {
+    padding: var(--s-6) var(--s-5);
+    display: flex; flex-direction: column;
+    gap: var(--s-4);
+    position: relative;
+  }
+  .plan.featured {
+    border-color: color-mix(in oklch, var(--brand) 40%, transparent);
+    box-shadow:
+      inset 0 1px 0 var(--glass-highlight),
+      0 30px 60px -20px color-mix(in oklch, var(--brand) 30%, transparent);
+  }
+  .plan.featured::before {
+    content: "Mais procurado";
+    position: absolute; top: -10px; left: 50%;
+    transform: translateX(-50%);
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .plan-name {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .plan-price {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .plan-price .u {
+    display: block;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-mute);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+  .plan-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .plan ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .plan li {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .plan li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--brand-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .plan .btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+</style>

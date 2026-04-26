@@ -1,0 +1,30 @@
+---
+import type { Translations } from "../translations";
+import Background from "./home/Background.astro";
+import Hero from "./home/Hero.astro";
+import Services from "./home/Services.astro";
+import About from "./home/About.astro";
+import Stack from "./home/Stack.astro";
+import Cases from "./home/Cases.astro";
+import Team from "./home/Team.astro";
+import Pricing from "./home/Pricing.astro";
+import Cta from "./home/Cta.astro";
+import Footer from "./home/Footer.astro";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<Background />
+<Hero t={t.hero} />
+<Services t={t.services} />
+<About t={t.about} />
+<Stack t={t.stack} />
+<Cases t={t.cases} />
+<Team t={t.team} />
+<Pricing t={t.pricing} />
+<Cta t={t.cta} />
+<Footer t={t.footer} />

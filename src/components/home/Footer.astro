@@ -1,0 +1,97 @@
+---
+import type { Translations } from "../../translations";
+
+interface Props {
+  t: Translations["footer"];
+}
+
+const { t } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:12px">
+          <img src={`${baseUrl}logo.png`} alt="Éden Technologies" class="nav-logo-image" width="40" height="33" />
+          <span>Éden<span style="color:var(--text-mute);font-weight:400"> / tech</span></span>
+        </div>
+        <p id="foot-tagline" style="color:var(--text-dim);font-size:13.5px;max-width:30ch">{t.tagline}</p>
+      </div>
+      <div>
+        <h4 id="foot-col1-h">{t.col1}</h4>
+        <div id="foot-col1-items">{t.col1Items.map((i) => <a href="#">{i}</a>)}</div>
+      </div>
+      <div>
+        <h4 id="foot-col2-h">{t.col2}</h4>
+        <div id="foot-col2-items">{t.col2Items.map((i) => <a href="#">{i}</a>)}</div>
+      </div>
+      <div>
+        <h4 id="foot-col3-h">{t.col3}</h4>
+        <div id="foot-col3-items">{t.col3Items.map((i) => <a href="#">{i}</a>)}</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span id="foot-copy">{t.copy}</span>
+      <span id="foot-built">{t.built}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .nav-logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 600; letter-spacing: -0.02em;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .nav-logo-image {
+    width: 40px;
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  footer {
+    padding: var(--s-12) 0 var(--s-6);
+    border-top: 1px solid var(--stroke-soft);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--s-8);
+    padding-bottom: var(--s-8);
+  }
+  @media (max-width: 900px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .foot-grid { grid-template-columns: 1fr; } }
+  .foot-grid h4 {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--s-3);
+    font-weight: 400;
+  }
+  .foot-grid a,
+  .foot-grid div > a {
+    display: block;
+    color: var(--text-dim);
+    font-size: 14px;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+  .foot-grid a:hover { color: var(--text); }
+  .foot-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--stroke-soft);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-mute);
+    flex-wrap: wrap;
+  }
+</style>

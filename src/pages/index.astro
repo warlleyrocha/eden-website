@@ -1,0 +1,13 @@
+---
+import Home from '../components/Home.astro';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { translations } from '../translations';
+
+const t = translations.pt;
+---
+
+<Layout lang="pt">
+  <Header nav={t.nav} lang="pt" />
+  <Home t={t} />
+</Layout>

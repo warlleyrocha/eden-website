@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  lang?: "pt" | "en";
+}
+
+const {
+  title = "Éden Technologies — Custom software, engineered with precision",
+  description = "Software house em São Paulo. Construímos plataformas, produtos internos e sistemas críticos para empresas que não querem se contentar com SaaS genérico.",
+  ogImage = "/og-image.png",
+  lang = "pt",
+} = Astro.props;
+
+const siteUrl = "https://edentechnologies.com.br";
+const baseUrl = import.meta.env.BASE_URL;
+const canonical = `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
+const htmlLang = lang === "pt" ? "pt-BR" : "en";
+const ogLocale = lang === "pt" ? "pt_BR" : "en_US";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Éden Technologies",
+  url: siteUrl,
+  logo: `${siteUrl}/favicons/favicon-96x96.png`,
+  description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "São Paulo",
+    addressCountry: "BR",
+  },
+};
+---
+<!doctype html>
+<html lang={htmlLang} data-lang={lang} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/png" href={`${baseUrl}favicons/favicon-96x96.png`} sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicons/favicon.svg`} />
+    <link rel="shortcut icon" href={`${baseUrl}favicons/favicon.ico`} />
+    <link rel="apple-touch-icon" sizes="180x180" href={`${baseUrl}favicons/apple-touch-icon.png`} />
+    <link rel="manifest" href={`${baseUrl}favicons/site.webmanifest`} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="alternate" hreflang="pt-BR" href={`${siteUrl}/`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content={ogLocale} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <slot />
+    <script is:inline src={`${baseUrl}app.js`}></script>
+  </body>
+</html>
